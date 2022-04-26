@@ -2436,3 +2436,36 @@ string管理char *所分配的内存，不用担心幅值越界和取值越界�
 
 ![image-20220426183256684](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426183256684.png)
 
+####	3.1.6 string字符串比较
+
+比较方式：按照ASCII码进行对比
+
+=返回0
+
+\>返回1
+
+\<返回-1
+
+函数原型：
+
+- int compare(const string &s) const;//与字符串s比较
+- int compare(const char *s) const;//与字符串s进行比较
+
+
+
+####	3.1.7 string字符存取
+
+- char& operator[](int n);//通过[]方式存取字符
+- char& at(int n);//通过at方法存取字符
+
+
+
+####	3.1.8 string插入和删除
+
+![image-20220426184708610](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426184708610.png)
+
+####	3.1.9 string子串
+
+函数原型：
+
+- string substr(int pos=0,int n=npos) const;//返回由pos开始的n个字符组成的字符串
