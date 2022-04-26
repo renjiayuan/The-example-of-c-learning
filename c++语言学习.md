@@ -2410,3 +2410,29 @@ string管理char *所分配的内存，不用担心幅值越界和取值越界�
 - string& assign(const string &s); //把字符串s赋值给当前字符串
 - string& assign(int n,char c);用n个字符c赋给当前字符串
 
+
+
+####	3.1.4 string字符串拼接
+
+功能描述：实现在字符串末尾拼接字符串
+
+函数原型：
+
+- string& operator+=(const char* str);//重载+=运算符
+- string& operator+=(const char c);//重载+=运算符
+- string& operator+=(const string& str);//重载+=运算符
+- string& append(const char *s);//把字符串连接到当前字符串结尾
+- string& append(const char*s, int n);//将字符串s前n个字符连接到当前字符串末尾
+- string& append(const string &s);//同operator+=(const string& str)
+- string& append(const string &s,int pos,int n);//字符串s从pos开始的n个字符连接到字符串结尾
+
+
+
+####	3.1.5 string查找和替换
+
+查找：查找指定的字符串是否存在
+
+替换：在指定的位置置换字符串
+
+![image-20220426183256684](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426183256684.png)
+
