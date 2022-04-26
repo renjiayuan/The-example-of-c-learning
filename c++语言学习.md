@@ -2469,3 +2469,158 @@ string管理char *所分配的内存，不用担心幅值越界和取值越界�
 函数原型：
 
 - string substr(int pos=0,int n=npos) const;//返回由pos开始的n个字符组成的字符串
+
+
+
+###	3.2 Vector容器
+
+####	3.2.1 vector基本概念
+
+功能：vector数据结构和数组十分相似，也被称为单端数组
+
+vector与普通数组区别：不同之处在于数组是静态空间，而vector可以动态扩展
+
+动态扩展：并不是在源空间之后续接新空间，而是找到更大的内存空间，然后将元数据拷贝新空间，释放原空间。
+
+vector的迭代器是支持随机访问的迭代器。
+
+####	3.2.2 vector构造函数
+
+![image-20220426195526211](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426195526211.png)
+
+```c++
+#include<iostream>
+using namespace std;
+#include<vector>
+
+
+void printVector(vector<int>v1){
+    for(vector<int>::iterator it=v1.begin();it!=v1.end();it++){
+        cout<<(*it)<<" ";
+    }
+    cout<<endl;
+}
+//vector容器构造
+void test01(){
+    vector<int>v1;//默认构造 无参构造
+    for(int i=0;i<10;i++){
+        v1.push_back(i);
+    }
+    printVector(v1);
+    //通过区间方式进行构造
+    vector<int>v2(v1.begin(),v1.end());
+    printVector(v2);
+    //n个elem方式构造
+    vector<int>v3(10,100);
+    printVector(v3);
+    //拷贝构造
+    vector<int>v4(v3);
+    printVector(v4);
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+
+
+####	3.2.3 vector赋值操作
+
+![image-20220426202258517](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426202258517.png)
+
+```c++
+#include<iostream>
+using namespace std;
+#include<vector>
+
+void printVector(vector<int>v1){
+    for(vector<int>::iterator it=v1.begin();it!=v1.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+void test01(){
+    vector<int>v1;
+    for(int i=0;i<10;i++){
+        v1.push_back(i);
+    }
+    printVector(v1);
+    //赋值
+    vector<int>v2;
+    v2=v1;
+    printVector(v2);
+    //assign
+    vector<int>v3;
+    v3.assign(v1.begin(),v1.end());
+    printVector(v3);
+    //n个elem方式赋值
+    vector<int>v4;
+    v4.assign(10,100);
+    printVector(v4);
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+####	3.2.4 vector容量和大小
+
+![image-20220426203418557](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426203418557.png)
+
+####	3.2.5 vector插入和删除
+
+![image-20220426203606697](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426203606697.png)
+
+####	3.2.6 vector数据存取
+
+![image-20220426210402211](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220426210402211.png)
+
+```c++
+#include<iostream>
+using namespace std;
+#include<vector>
+
+void test01(){
+    vector<int>v1;
+    for(int i=0;i<10;i++){
+        v1.push_back(i);
+    }
+    //利用[]来访问数组中的元素
+    for(int i;i<v1.size();i++){
+        cout<<v1[i]<<" ";
+    }
+    cout<<endl;
+    //利用at方式
+    for(int i=0;i<10;i++){
+        cout<<v1.at(i)<<" ";
+    }
+    cout<<endl;
+    //访问第一个元素
+    cout<<"第一个元素为："<<v1.front()<<endl;
+    //获取最后一个元素
+    cout<<"最后一个元素："<<v1.back()<<endl;
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+
+
+####	3.2.7 vector互换容器
+
+函数原型：
+
+​	swap(vec);//将vec与本身元素互换
+
+####	3.2.8 vector预留空间
+
+减少vector在动态扩展容量时的扩展次数。
+
+函数原型：reserve（int len);//容器预留len个元素长度，预留位置不初始化，元素不可访问。
