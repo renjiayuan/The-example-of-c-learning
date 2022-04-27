@@ -2806,3 +2806,101 @@ int main(){
 }
 ```
 
+###	3.5 stack容器
+
+####	3.5.1 stack基本概念
+
+概念：stack是一种先进后出（first in last out,FILO)的数据结构，他只有一个出口。栈中只有顶端的元素才可以被外界使用，因此栈不允许有遍历行为。
+
+栈中入数据叫入栈，出数据叫出栈。
+
+####	3.5.2 stack常用接口
+
+![image-20220427193014221](C:\Users\11321\AppData\Roaming\Typora\typora-user-images\image-20220427193014221.png)
+
+
+
+```c++
+#include<iostream>
+using namespace std;
+#include<stack>
+
+//栈stack接口
+void test01(){
+    stack<int>s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    //只要栈不为空,就查看栈顶，并且执行出栈操作
+    while(!s.empty()){
+        //查看栈顶元素
+        cout<<"栈顶元素："<<s.top()<<endl;
+        s.pop();
+    }
+    cout<<"栈的大小："<<s.size()<<endl;
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+
+
+###	3.6 queue容器
+
+####	3.6.1 queue基本概念
+
+概念：是一种先进先出（First In First Out,FIFO)的数据结构，他有两个出口。
+
+队列容器允许从一端新增元素，从另一端移除元素。
+
+队列中只有对头和队尾才能被外界使用，因此队列不允许有遍历行为。
+
+队列中进数据叫入队push，出数据叫pop
+
+![image-20220427194625844](C:\Users\11321\AppData\Roaming\Typora\typora-user-images\image-20220427194625844.png)
+
+
+
+```c++
+#include<iostream>
+using namespace std;
+#include<queue>
+#include<string>
+
+class Person{
+public:
+    Person(string name,int age){
+        this->m_Name=name;
+        this->m_Age=age;
+    }
+    string m_Name;
+    int m_Age;
+};
+void test01(){
+    queue<Person>q;
+    Person p1("唐僧",30);
+    Person p2("孙悟空",1000);
+    Person p3("猪八戒",900);
+    Person p4("沙僧",80);
+    q.push(p1);
+    q.push(p2);
+    q.push(p3);
+    q.push(p4);
+    while(!q.empty()){
+        cout<<"队头元素：-----"<<q.front().m_Name<<" 年龄："<<q.front().m_Age<<endl;
+        cout<<"队尾元素：-----"<<q.back().m_Name<<" 年龄："<<q.back().m_Age<<endl;
+        q.pop();
+    }
+    cout<<"队列大小："<<q.size()<<endl;
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
