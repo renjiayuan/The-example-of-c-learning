@@ -2624,3 +2624,96 @@ int main(){
 减少vector在动态扩展容量时的扩展次数。
 
 函数原型：reserve（int len);//容器预留len个元素长度，预留位置不初始化，元素不可访问。
+
+###	3.3 deque容器
+
+####	3.3.1 deque容器基本概念
+
+功能：双端数组，可以对头端进行插入删除操作
+
+deque和vector的区别：
+
+- vector对于头部的插入删除效率低，数据量越大，效率越低
+- deque相对而言，对头部的插入删除速度比vector快
+- vector访问元素的速度会比deque快，这和两者内部实现有关
+
+deque内部工作原理：
+
+deque内部有个中控器，维护每段缓冲区中的内容，缓冲区中存放真实数据
+
+中控器维护的是每个缓冲区的地址，使得使用deque时像一片连续的内存空间。
+
+![image-20220427103728542](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220427103728542.png)
+
+deque容器的迭代器也是支持随机访问的。
+
+####	3.3.2 deque构造函数
+
+
+
+![image-20220427104022615](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220427104022615.png)
+
+####	3.3.3 deque赋值操作
+
+![image-20220427104127492](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220427104127492.png)
+
+
+
+####	3.3.4 deque大小操作
+
+![image-20220427104234493](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220427104234493.png)
+
+####	3.3.5 deque插入和删除
+
+
+
+![image-20220427104344352](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220427104344352.png)
+
+####	3.3.6 deque数据存取
+
+
+
+![image-20220427104521961](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20220427104521961.png)
+
+
+
+####	3.3.7 deque排序
+
+算法：
+
+sort(iterator beg,iterator end);//对beg和end区间内元素进行排序
+
+```c++
+#include<iostream>
+using namespace std;
+#include<deque>
+#include<algorithm>
+
+void printDeque(const deque<int>&d){
+    for(deque<int>::const_iterator it=d.begin();it!=d.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+//deque排序
+void test01(){
+    deque<int>d;
+    d.push_back(10);
+    d.push_back(20);
+    d.push_back(30);
+    d.push_back(500);
+    d.push_back(200);
+    d.push_back(300);
+    printDeque(d);
+    //排序,sort默认升序排列
+    //vector容器也可以支持sort排序
+    sort(d.begin(),d.end());
+    printDeque(d);
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
