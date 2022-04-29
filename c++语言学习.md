@@ -3042,3 +3042,69 @@ int main(){
 
 
 
+```c++
+#include<iostream>
+using namespace std;
+#include<list>
+
+void printList(const list<int>L){
+    for(list<int>::const_iterator it=L.begin();it!=L.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+void test01(){
+    list<int>L;
+    L.push_back(10);
+    L.push_back(20);
+    L.push_back(30);
+    L.push_front(100);
+    L.push_front(200);
+    L.push_front(300);
+    printList(L);
+    L.pop_back();//尾删
+    printList(L);
+    L.pop_front();//头删
+    printList(L);
+    L.insert(L.begin(),1000);//在某一位置插入
+    printList(L);
+    L.erase(L.begin());//删除
+    printList(L);
+    L.push_back(10000);
+    printList(L);
+    L.remove(10000);//移除
+    printList(L);
+    L.clear();//清空
+    printList(L);
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+####	3.7.6 list 数据存取
+
+函数原型：
+
+- front();//返回第一个元素
+- back();//返回最后一个元素
+
+
+
+####	3.7.7 list反转和排序
+
+- reverse();//反转链表
+- sort();//链表排序
+
+
+
+####	3.7.8 排序案例
+
+案例描述：将person自定义数据类型进行排序，person中属性有姓名、年龄、身高
+
+排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
+
+
+
