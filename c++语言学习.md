@@ -3164,3 +3164,98 @@ int main(){
 
 - 对于自定义数据类型，必须指定排序规则，否则编译器不知道如何排序
 - 高级排序只是在排序规则上在进行一次逻辑规则制定，并不复杂
+
+
+
+
+
+###	3.8 set/multiset容器
+
+####	3.8.1 set基本概念
+
+简介：所有的元素会在插入时自动被排序
+
+本质： set/multiset属于关联式容器，底层结构是用二叉树实现
+
+set和multiset区别：
+
+- set不允许容器中有重复的元素
+- multiset允许容器中有重复的元素
+
+
+
+####	3.8.2 set构造和赋值
+
+
+
+![image-20220429205432532](C:\Users\11321\AppData\Roaming\Typora\typora-user-images\image-20220429205432532.png)
+
+
+
+```c++
+#include<iostream>
+using namespace std;
+#include<set>
+
+void printSet(set<int>s){
+    for(set<int>::iterator it=s.begin();it!=s.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+void test01(){
+    set<int>s1;
+    s1.insert(10);//只有这一种方式
+    s1.insert(20);
+    s1.insert(30);
+    s1.insert(40);
+    printSet(s1);//所有元素在被插入的时候会自动排序
+    //拷贝构造
+    set<int>s2(s1);
+    printSet(s2);
+    set<int>s3;
+    s3=s2;
+    printSet(s3);
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+####	3.8.3 set大小和交换
+
+函数原型：
+
+- size();//返回容器中元素的数目
+- empty();//判断容器是否为空
+- swap(st);//交换两个集合容器
+
+
+
+####	3.8.4 set插入和删除
+
+函数原型：
+
+![image-20220429210352971](C:\Users\11321\AppData\Roaming\Typora\typora-user-images\image-20220429210352971.png)
+
+
+
+####	3.8.5 set查找和统计
+
+函数原型：
+
+- find(key);//查找key是否存在，若存在返回该键的元素的迭代器；若不存在，返回set.end()
+- count(key);//统计key元素的个数
+
+
+
+####	3.8.6 set和multiset区别
+
+- set不可以重复插入数据，而multiset可以
+- set插入数据的同时会返回插入结果，表示插入是否成功
+- multiset不会检测数据，因此可以插入重复数据
+
+
+
