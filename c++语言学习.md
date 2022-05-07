@@ -3487,3 +3487,162 @@ int main(){
 }
 ```
 
+##	4 STL函数对象
+
+###	4.1 函数对象
+
+####	4.1.1 函数对象概念
+
+概念：
+
+- 重载函数调用操作符的类，其对象常称之为函数对象
+- 函数对象使用重载的（）时，行为类似函数调用，也叫仿函数
+
+本质：
+
+函数对象（仿函数）时一个类，不是一个函数
+
+
+
+####	4.1.2 函数对象使用
+
+特点：
+
+- 函数对象在使用时，可以像普通函数那样调用可以有参数，可以有返回值
+- 函数对象超过普通函数的概念，函数对象可以有自己的状态
+- 函数对象可以作为参数传递
+
+```c++
+#include<iostream>
+using namespace std;
+#include<string>
+
+class MyAdd{
+public:
+    int operator()(int v1,int v2){
+        return v1+v2;
+    }
+};
+void test01(){
+    MyAdd myadd;
+    cout<<myadd(10,10)<<endl;
+}
+class MyPrint{
+public:
+    MyPrint(){
+        this->count=0;
+    }
+    void operator()(string test){
+        cout<<test<<endl;
+        this->count++;
+    }
+    int count;
+};
+void test02(){
+    MyPrint myprint;
+    myprint("hello world!");
+    cout<<"myPrint调用的次数为："<<myprint.count<<endl;
+}
+void doPrint(MyPrint &mp,string test){
+    mp(test);
+}
+void test03(){
+    MyPrint myprint;
+    doPrint(myprint,"hello c++");
+}
+int main(){
+    //test01();
+    //test02();
+    test03();
+    system("pause");
+    return 0;
+}
+```
+
+### 4.2 谓词
+
+####	4.2.1 谓词概念
+
+概念：
+
+- 返回bool类型的仿函数称为谓词
+- 如果operator（）接受一个参数，那么叫做一元谓词
+- 如果接受两个参数，叫做二元谓词
+
+
+
+####	4.2.2 一元谓词
+
+```c++
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<algorithm>
+
+class GreaterFive{
+public:
+    bool operator()(int val){
+        return val>5;
+    }
+};
+void test01(){
+    vector<int>v;
+    for(int i=0;i<10;i++){
+        v.push_back(i);
+    }
+    //GreaterFive()匿名函数对象
+    vector<int>::iterator it=find_if(v.begin(),v.end(),GreaterFive());
+    if(it==v.end()){
+        cout<<"未找到"<<endl;
+    }else{
+        cout<<"找到了大于5的数字为： "<<*it<<endl;
+    }
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
+####	4.2.3 二元谓词
+
+```c++
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<algorithm>
+
+class MyCompare{
+public:
+    bool operator()(int val1,int val2){
+        return val1>val2;
+    }
+};
+void test01(){
+    vector<int>v;
+    v.push_back(10);
+    v.push_back(40);
+    v.push_back(20);
+    v.push_back(30);
+    v.push_back(50);
+    sort(v.begin(),v.end());
+    for(vector<int>::iterator it=v.begin();it!=v.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+    //改变算法策略
+    sort(v.begin(),v.end(),MyCompare());
+    cout<<"------------------"<<endl;
+    for(vector<int>::iterator it=v.begin();it!=v.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+int main(){
+    test01();
+    system("pause");
+    return 0;
+}
+```
+
