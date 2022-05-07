@@ -3646,3 +3646,87 @@ int main(){
 }
 ```
 
+###	4.3 内建函数对象
+
+####	4.3.1 内建函数对象意义
+
+STL内建了一些函数对象，使用内建函数对象需要引入头文件#include<functional>
+
+####	4.3.2 算术仿函数
+
+```c++
+#include<iostream>
+using namespace std;
+#include<functional>
+
+//negate 一元仿函数 取反
+void test01(){
+    negate<int>n;
+    cout<<n(50)<<endl;
+}
+//plus 二元仿函数 加法
+void test02(){
+    plus<int>p;
+    cout<<p(10,20)<<endl;
+}
+int main(){
+    test01();
+    test02();
+    system("pause");
+    return 0;
+}
+```
+
+####	4.3.3关系仿函数
+
+实现关系对比
+
+```c++
+#include<iostream>
+using namespace std;
+#include<functional>
+#include<vector>
+#include<algorithm>
+
+class MyCompare{
+public:
+    bool operator()(int val1,int val2){
+        return val1>val2;
+    }
+};
+//大于 greater
+void test01(){
+    vector<int>v;
+    v.push_back(10);
+    v.push_back(30);
+    v.push_back(40);
+    v.push_back(20);
+    v.push_back(50);
+    for(vector<int>::iterator it=v.begin();it!=v.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+    // sort(v.begin(),v.end(),MyCompare());
+    // cout<<"-----------"<<endl;
+    // for(vector<int>::iterator it=v.begin();it!=v.end();it++){
+    //     cout<<*it<<" ";
+    // }
+    // cout<<endl;
+    sort(v.begin(),v.end(),greater<int>());
+    for(vector<int>::iterator it=v.begin();it!=v.end();it++){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+
+int main(){
+    test01();
+    system("pause");
+    return 0;
+} 
+```
+
+####	4.3.4 逻辑仿函数
+
+实现逻辑运算
+
