@@ -3852,3 +3852,15 @@ int main(){
 }
 ```
 
+###	5.2 常用查找算法
+
+####	5.2.1 find
+
+查找制定元素找到返回制定元素的迭代器，找不到返回结束迭代器end()
+
+####	5.2.2 find_if
+
+按条件查找元素
+
+find_if(iterator beg, iterator end,_Pred);
+
